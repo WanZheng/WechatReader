@@ -19,10 +19,4 @@
     return description;
 }
 
-
-- (NSString *)title {
-    // TODO:
-    return self.url;
-}
-
 @end

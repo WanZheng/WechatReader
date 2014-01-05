@@ -63,8 +63,11 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    // cell.textLabel.text = article.title;
-    cell.textLabel.text = article.url;
+    if (article.title) {
+        cell.textLabel.text = article.title;
+    }else{
+        cell.textLabel.text = article.url;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

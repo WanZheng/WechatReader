@@ -45,6 +45,28 @@
     self.timer = nil;
 }
 
+- (RDRArticle *)findArticleByUrl:(NSString *)url {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"url == %@", url];
+    fetchRequest.fetchLimit = 1;
+
+    NSError *error = nil;
+    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    if (error != nil) {
+        NSLog(@"Failed to fetch url: %@", error);
+    }
+
+    if (result.count >= 1) {
+        return result[0];
+    }
+    return nil;
+}
+
 - (void)checkImmediately {
     //Check what is on the paste board
     if (! [self.pasteboard containsPasteboardTypes:[NSArray arrayWithObjects:@"public.utf8-plain-text", @"public.text", nil]]){
@@ -57,10 +79,17 @@
     }
     
     NSLog(@"message: %@", url);
+
     if ([self isValidUrl:url]) {
-        RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
-                                                                          inManagedObjectContext:self.managedObjectContext];
-        article.url = url;
+        RDRArticle *article = [self findArticleByUrl:url];
+
+        if (article == nil) {
+            article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
+                                                                  inManagedObjectContext:self.managedObjectContext];
+            article.url = url;
+        }
+
+        article.ctime = [NSDate date];
 
         NSError *error;
         if (! [self.managedObjectContext save:&error]) {
