@@ -14,6 +14,6 @@
 
 - (void)startBgMonitor;
 - (void)stopBgMonitor;
-- (void)checkImmediately;
+- (BOOL)checkImmediately;
 
 @end

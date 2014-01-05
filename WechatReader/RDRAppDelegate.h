@@ -12,4 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (RDRAppDelegate *)getInstance;
+
+- (void)showBanner:(NSString *)text;
+
 @end

@@ -20,6 +20,10 @@
 
 @implementation RDRAppDelegate
 
++ (RDRAppDelegate *)getInstance {
+    return (RDRAppDelegate *)([UIApplication sharedApplication].delegate);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -31,7 +35,7 @@
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 
@@ -77,6 +81,8 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     [self saveContext];
+
+    [self showBanner:@"即将退出，如需求请重新打开"];
 }
 
 - (RDRPasteBoardMonitor *)pasteBoardMonitor {
@@ -85,6 +91,17 @@
         _pasteBoardMonitor.managedObjectContext = self.managedObjectContext;
     }
     return _pasteBoardMonitor;
+}
+
+- (void)showBanner:(NSString *)text {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = text;
+    // notification.alertAction = @"action"; // TODO:
+
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.applicationIconBadgeNumber = 1;
+
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 #pragma mark - core data

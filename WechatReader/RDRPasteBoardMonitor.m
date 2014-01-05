@@ -8,6 +8,7 @@
 
 #import "RDRPasteBoardMonitor.h"
 #import "RDRArticle.h"
+#import "RDRAppDelegate.h"
 
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
@@ -67,19 +68,20 @@
     return nil;
 }
 
-- (void)checkImmediately {
+- (BOOL)checkImmediately {
     //Check what is on the paste board
     if (! [self.pasteboard containsPasteboardTypes:[NSArray arrayWithObjects:@"public.utf8-plain-text", @"public.text", nil]]){
-        return;
+        return NO;
     }
     
     NSString *url = self.pasteboard.string;
     if ([url isEqualToString:self.lastUrl]) {
-        return;
+        return NO;
     }
     
     NSLog(@"message: %@", url);
 
+    BOOL saved = NO;
     if ([self isValidUrl:url]) {
         RDRArticle *article = [self findArticleByUrl:url];
 
@@ -101,15 +103,22 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+
+        saved = YES;
     }
     
     self.lastUrl = url;
+
+    return saved;
 }
 
 - (void)onTimer:(NSTimer *)timer {
     NSLog(@"on timer");
 
-    [self checkImmediately];
+    BOOL saved = [self checkImmediately];
+    if (saved) {
+        [[RDRAppDelegate getInstance] showBanner:@"文章已收藏"];
+    }
     
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground){
         NSTimeInterval timeLeft = [UIApplication sharedApplication].backgroundTimeRemaining;
