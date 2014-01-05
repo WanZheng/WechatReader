@@ -29,13 +29,15 @@
 {
     [super viewDidLoad];
     
-    self.title = @"微信阅读器";
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.title = @"微信阅读器";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -100,6 +102,8 @@
     
     RDRContentViewController *contentViewController = [[RDRContentViewController alloc] init];
     contentViewController.article = article;
+    
+    self.title = @"返回";
     [self.navigationController pushViewController:contentViewController animated:YES];
 }
 

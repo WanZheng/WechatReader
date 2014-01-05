@@ -8,7 +8,7 @@
 
 #import "RDRContentViewController.h"
 
-@interface RDRContentViewController ()
+@interface RDRContentViewController () <UIWebViewDelegate>
 @property (nonatomic) UIWebView *webView;
 @end
 
@@ -27,6 +27,7 @@
     [super viewDidLoad];
     
     self.webView = [[UIWebView alloc] init];
+    self.webView.delegate = self;
     self.webView.frame = self.view.bounds;
     [self.view addSubview:self.webView];
     
@@ -38,6 +39,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - webview delegate
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    self.title = @"loading";
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    // TODO:
+    NSLog(@"load error: %@", error);
 }
 
 @end
