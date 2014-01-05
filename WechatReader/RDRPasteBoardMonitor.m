@@ -7,7 +7,7 @@
 //
 
 #import "RDRPasteBoardMonitor.h"
-#import "RDRArticleManager.h"
+#import "RDRArticle.h"
 
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
@@ -17,16 +17,6 @@
 
 @implementation RDRPasteBoardMonitor
 
-+ (RDRPasteBoardMonitor *)instance {
-    static dispatch_once_t s_token;
-    static RDRPasteBoardMonitor *s_instance;
-    dispatch_once(&s_token, ^{
-        s_instance = [[RDRPasteBoardMonitor alloc] init];
-    });
-
-    return s_instance;
-}
-
 - (UIPasteboard *)pasteboard {
     if (_pasteboard == nil) {
         _pasteboard = [UIPasteboard generalPasteboard];
@@ -34,11 +24,11 @@
     return _pasteboard;
 }
 
-- (void)start {
+- (void)startBgMonitor {
     NSLog(@"start monitor");
 
     [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [self stop];
+        [self stopBgMonitor];
     }];
 
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1
@@ -48,7 +38,7 @@
                                                  repeats:YES];
 }
 
-- (void)stop {
+- (void)stopBgMonitor {
     NSLog(@"stop monitor");
 
     [self.timer invalidate];
@@ -68,7 +58,20 @@
     
     NSLog(@"message: %@", url);
     if ([self isValidUrl:url]) {
-        [[RDRArticleManager instance] addArticleWithUrl:url];
+        RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
+                                                                          inManagedObjectContext:self.managedObjectContext];
+        article.url = url;
+
+        NSError *error;
+        if (! [self.managedObjectContext save:&error]) {
+            /*
+               Replace this implementation with code to handle the error appropriately.
+
+               abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
     }
     
     self.lastUrl = url;

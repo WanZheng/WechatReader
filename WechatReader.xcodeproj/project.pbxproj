@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
+		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
+		8B81462018795DC400EE43FF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B81461F18795DC400EE43FF /* CoreData.framework */; };
 		8B936453187831E400175262 /* RDRArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B936452187831E400175262 /* RDRArticle.m */; };
-		8B9364561878326B00175262 /* RDRArticleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9364551878326B00175262 /* RDRArticleManager.m */; };
 		8B93645918783F5100175262 /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */; };
 		8BD849371878166A00F072E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD849361878166A00F072E1 /* Foundation.framework */; };
 		8BD849391878166A00F072E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD849381878166A00F072E1 /* CoreGraphics.framework */; };
@@ -39,10 +40,10 @@
 /* Begin PBXFileReference section */
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
+		8B47AE9318795AC300189F0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		8B81461F18795DC400EE43FF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8B936451187831E400175262 /* RDRArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRArticle.h; path = Model/RDRArticle.h; sourceTree = "<group>"; };
 		8B936452187831E400175262 /* RDRArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRArticle.m; path = Model/RDRArticle.m; sourceTree = "<group>"; };
-		8B9364541878326B00175262 /* RDRArticleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRArticleManager.h; path = Model/RDRArticleManager.h; sourceTree = "<group>"; };
-		8B9364551878326B00175262 /* RDRArticleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRArticleManager.m; path = Model/RDRArticleManager.m; sourceTree = "<group>"; };
 		8B93645718783F5100175262 /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
 		8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
 		8BD849331878166A00F072E1 /* WechatReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WechatReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B81462018795DC400EE43FF /* CoreData.framework in Frameworks */,
 				8BD849391878166A00F072E1 /* CoreGraphics.framework in Frameworks */,
 				8BD8493B1878166A00F072E1 /* UIKit.framework in Frameworks */,
 				8BD849371878166A00F072E1 /* Foundation.framework in Frameworks */,
@@ -94,8 +96,6 @@
 			children = (
 				8B936451187831E400175262 /* RDRArticle.h */,
 				8B936452187831E400175262 /* RDRArticle.m */,
-				8B9364541878326B00175262 /* RDRArticleManager.h */,
-				8B9364551878326B00175262 /* RDRArticleManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -103,6 +103,7 @@
 		8BD8492A1878166A00F072E1 = {
 			isa = PBXGroup;
 			children = (
+				8B47AE9218795AC300189F0D /* Model.xcdatamodeld */,
 				8BD8493C1878166A00F072E1 /* WechatReader */,
 				8BD849551878166B00F072E1 /* WechatReaderTests */,
 				8BD849351878166A00F072E1 /* Frameworks */,
@@ -122,6 +123,7 @@
 		8BD849351878166A00F072E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B81461F18795DC400EE43FF /* CoreData.framework */,
 				8BD849361878166A00F072E1 /* Foundation.framework */,
 				8BD849381878166A00F072E1 /* CoreGraphics.framework */,
 				8BD8493A1878166A00F072E1 /* UIKit.framework */,
@@ -133,14 +135,14 @@
 		8BD8493C1878166A00F072E1 /* WechatReader */ = {
 			isa = PBXGroup;
 			children = (
-				8B936450187831AC00175262 /* Model */,
-				8BD849651878182E00F072E1 /* ViewController */,
 				8BD849451878166A00F072E1 /* RDRAppDelegate.h */,
 				8BD849461878166A00F072E1 /* RDRAppDelegate.m */,
-				8BD849481878166A00F072E1 /* Images.xcassets */,
-				8BD8493D1878166A00F072E1 /* Supporting Files */,
 				8B93645718783F5100175262 /* RDRPasteBoardMonitor.h */,
 				8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */,
+				8B936450187831AC00175262 /* Model */,
+				8BD849651878182E00F072E1 /* ViewController */,
+				8BD849481878166A00F072E1 /* Images.xcassets */,
+				8BD8493D1878166A00F072E1 /* Supporting Files */,
 			);
 			path = WechatReader;
 			sourceTree = "<group>";
@@ -284,10 +286,10 @@
 				8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */,
 				8B93645918783F5100175262 /* RDRPasteBoardMonitor.m in Sources */,
 				8BD8496A187818C300F072E1 /* RDRIndexViewController.m in Sources */,
+				8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */,
 				8BD849431878166A00F072E1 /* main.m in Sources */,
 				8BD849471878166A00F072E1 /* RDRAppDelegate.m in Sources */,
 				8B936453187831E400175262 /* RDRArticle.m in Sources */,
-				8B9364561878326B00175262 /* RDRArticleManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +508,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8B47AE9218795AC300189F0D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B47AE9318795AC300189F0D /* Model.xcdatamodel */,
+			);
+			currentVersion = 8B47AE9318795AC300189F0D /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = WechatReader/Model/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8BD8492B1878166A00F072E1 /* Project object */;
 }

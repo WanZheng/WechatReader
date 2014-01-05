@@ -10,13 +10,7 @@
 
 @implementation RDRArticle
 
-- (id)initWithUrl:(NSString *)url {
-    self = [super init];
-    if (self) {
-        _url = url;
-    }
-    return self;
-}
+@dynamic url, title, author, imageUrl, ctime;
 
 - (NSString *)description {
     NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
@@ -28,7 +22,7 @@
 
 - (NSString *)title {
     // TODO:
-    return _url;
+    return self.url;
 }
 
 @end

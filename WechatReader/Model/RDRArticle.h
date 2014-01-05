@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface RDRArticle : NSObject
+@interface RDRArticle : NSManagedObject
+
+@property (nonatomic) NSDate *ctime;
 @property (nonatomic) NSString *url;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *author;
 @property (nonatomic) NSString *imageUrl;
-
-- (id)initWithUrl:(NSString *)url;
 
 @end

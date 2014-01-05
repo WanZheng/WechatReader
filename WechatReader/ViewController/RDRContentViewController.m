@@ -44,6 +44,7 @@
 #pragma mark - webview delegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     self.title = @"loading";
+    NSLog(@"loading %@", self.article.url);
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

@@ -7,23 +7,13 @@
 //
 
 #import "RDRIndexViewController.h"
-#import "RDRArticleManager.h"
 #import "RDRContentViewController.h"
 
-@interface RDRIndexViewController ()
-@property (nonatomic) RDRArticleManager *articleManager;
+@interface RDRIndexViewController () <NSFetchedResultsControllerDelegate>
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation RDRIndexViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        _articleManager = [RDRArticleManager instance];
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -34,23 +24,23 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.title = @"微信阅读器";
-}
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self.articleManager addObserver:self
-                          forKeyPath:@"articles"
-                             options:NSKeyValueObservingOptionNew
-                             context:nil];
-    
     [self.tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.articleManager removeObserver:self forKeyPath:@"articles"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,12 +50,6 @@
 }
 
 #pragma mark - Table view data source
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    NSLog(@"keyPath=%@", keyPath);
-    
-    [self.tableView reloadData];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -73,8 +57,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return self.articleManager.articles.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // cell.textLabel.text = article.title;
+    cell.textLabel.text = article.url;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,21 +74,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] init];
     }
-    
-    assert(indexPath.row < self.articleManager.articles.count);
-    
-    RDRArticle *article = self.articleManager.articles[indexPath.row];
-    cell.textLabel.text = article.title;
-    
+
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= self.articleManager.articles.count) {
-        return;
-    }
-    
-    RDRArticle *article = self.articleManager.articles[indexPath.row];
+    RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     RDRContentViewController *contentViewController = [[RDRContentViewController alloc] init];
     contentViewController.article = article;
@@ -157,5 +139,63 @@
 }
 
  */
+
+#pragma mark - core data
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    // Create and configure a fetch request with the Book entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Article" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create the sort descriptors array.
+    NSSortDescriptor *ctimeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ctime" ascending:NO];
+    NSArray *sortDescriptors = @[ctimeDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Create and initialize the fetch results controller.
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                    managedObjectContext:self.managedObjectContext
+                                                                      sectionNameKeyPath:nil
+                                                                               cacheName:@"articles"];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+    }
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
 
 @end

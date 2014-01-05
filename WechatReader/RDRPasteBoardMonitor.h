@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface RDRPasteBoardMonitor : NSObject
-+ (RDRPasteBoardMonitor *)instance;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 
-- (void)start;
-- (void)stop;
+- (void)startBgMonitor;
+- (void)stopBgMonitor;
 - (void)checkImmediately;
 
 @end
