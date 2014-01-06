@@ -9,6 +9,7 @@
 #import "RDRPasteBoardMonitor.h"
 #import "RDRArticle.h"
 #import "RDRAppDelegate.h"
+#import "RDRArticleParser.h"
 
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
@@ -116,6 +117,8 @@
         }
 
         saved = YES;
+
+        [[RDRAppDelegate sharedInstance].articleParser parseArticle:article];
     }
     
     return saved;

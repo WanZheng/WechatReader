@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818796CA8D42E83FD00429F /* RDRArticleParser.m */; };
+		181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
 		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
 		8B81462018795DC400EE43FF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B81461F18795DC400EE43FF /* CoreData.framework */; };
 		8B936453187831E400175262 /* RDRArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B936452187831E400175262 /* RDRArticle.m */; };
-		8B93645918783F5100175262 /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */; };
 		8BD849371878166A00F072E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD849361878166A00F072E1 /* Foundation.framework */; };
 		8BD849391878166A00F072E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD849381878166A00F072E1 /* CoreGraphics.framework */; };
 		8BD8493B1878166A00F072E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8493A1878166A00F072E1 /* UIKit.framework */; };
@@ -38,14 +39,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		181872811EB6EB6FC3D95EAB /* RDRConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRConfig.h; sourceTree = "<group>"; };
+		181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
+		1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArticleParser.h; sourceTree = "<group>"; };
+		1818796CA8D42E83FD00429F /* RDRArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArticleParser.m; sourceTree = "<group>"; };
+		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
 		8B47AE9318795AC300189F0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8B81461F18795DC400EE43FF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8B936451187831E400175262 /* RDRArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRArticle.h; path = Model/RDRArticle.h; sourceTree = "<group>"; };
 		8B936452187831E400175262 /* RDRArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRArticle.m; path = Model/RDRArticle.m; sourceTree = "<group>"; };
-		8B93645718783F5100175262 /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
-		8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
 		8BD849331878166A00F072E1 /* WechatReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WechatReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD849361878166A00F072E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8BD849381878166A00F072E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +95,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1818701B95D8FD8E31204CE8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */,
+				18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */,
+				1818796CA8D42E83FD00429F /* RDRArticleParser.m */,
+				1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		8B936450187831AC00175262 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,12 +152,12 @@
 			children = (
 				8BD849451878166A00F072E1 /* RDRAppDelegate.h */,
 				8BD849461878166A00F072E1 /* RDRAppDelegate.m */,
-				8B93645718783F5100175262 /* RDRPasteBoardMonitor.h */,
-				8B93645818783F5100175262 /* RDRPasteBoardMonitor.m */,
 				8B936450187831AC00175262 /* Model */,
 				8BD849651878182E00F072E1 /* ViewController */,
 				8BD849481878166A00F072E1 /* Images.xcassets */,
 				8BD8493D1878166A00F072E1 /* Supporting Files */,
+				1818701B95D8FD8E31204CE8 /* Service */,
+				181872811EB6EB6FC3D95EAB /* RDRConfig.h */,
 			);
 			path = WechatReader;
 			sourceTree = "<group>";
@@ -284,12 +299,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */,
-				8B93645918783F5100175262 /* RDRPasteBoardMonitor.m in Sources */,
 				8BD8496A187818C300F072E1 /* RDRIndexViewController.m in Sources */,
 				8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */,
 				8BD849431878166A00F072E1 /* main.m in Sources */,
 				8BD849471878166A00F072E1 /* RDRAppDelegate.m in Sources */,
 				8B936453187831E400175262 /* RDRArticle.m in Sources */,
+				181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */,
+				181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
