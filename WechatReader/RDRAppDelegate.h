@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (RDRAppDelegate *)getInstance;
++ (RDRAppDelegate *)sharedInstance;
 
 - (void)showBanner:(NSString *)text;
 

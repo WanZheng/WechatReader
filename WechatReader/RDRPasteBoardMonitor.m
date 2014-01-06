@@ -14,6 +14,7 @@
 @property (nonatomic) UIPasteboard *pasteboard;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSInteger changeCount;
+@property (nonatomic) UIBackgroundTaskIdentifier bgTaskId;
 @end
 
 @implementation RDRPasteBoardMonitor
@@ -29,8 +30,8 @@
 - (void)startBgMonitor {
     NSLog(@"start monitor");
 
-    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [self stopBgMonitor];
+    self.bgTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [self stopTimer];
     }];
 
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1
@@ -40,11 +41,18 @@
                                                  repeats:YES];
 }
 
+- (void)stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 - (void)stopBgMonitor {
     NSLog(@"stop monitor");
 
-    [self.timer invalidate];
-    self.timer = nil;
+    [self stopTimer];
+
+    [[UIApplication sharedApplication] endBackgroundTask:self.bgTaskId];
+    self.bgTaskId = UIBackgroundTaskInvalid;
 }
 
 - (RDRArticle *)findArticleByUrl:(NSString *)url {
@@ -118,12 +126,17 @@
 
     BOOL saved = [self checkImmediately];
     if (saved) {
-        [[RDRAppDelegate getInstance] showBanner:@"文章已收藏"];
+        [[RDRAppDelegate sharedInstance] showBanner:@"文章已收藏"];
     }
     
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground){
         NSTimeInterval timeLeft = [UIApplication sharedApplication].backgroundTimeRemaining;
         NSLog(@"Background time remaining: %.0f seconds (~%d mins)", timeLeft, (int)timeLeft / 60);
+
+        if (timeLeft < 5) {
+            [[RDRAppDelegate sharedInstance] showBanner:@"即将退出，如需要请重新打开程序。"];
+            [self stopBgMonitor];
+        }
     }
 }
 

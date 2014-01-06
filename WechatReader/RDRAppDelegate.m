@@ -20,7 +20,7 @@
 
 @implementation RDRAppDelegate
 
-+ (RDRAppDelegate *)getInstance {
++ (RDRAppDelegate *)sharedInstance {
     return (RDRAppDelegate *)([UIApplication sharedApplication].delegate);
 }
 
