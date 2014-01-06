@@ -13,7 +13,7 @@
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
 @property (nonatomic) NSTimer *timer;
-@property (nonatomic) NSString *lastUrl;
+@property (nonatomic) NSInteger changeCount;
 @end
 
 @implementation RDRPasteBoardMonitor
@@ -21,6 +21,7 @@
 - (UIPasteboard *)pasteboard {
     if (_pasteboard == nil) {
         _pasteboard = [UIPasteboard generalPasteboard];
+        _changeCount = -1;
     }
     return _pasteboard;
 }
@@ -69,16 +70,18 @@
 }
 
 - (BOOL)checkImmediately {
+    if (self.pasteboard.changeCount == self.changeCount) {
+        return NO;
+    }
+    self.changeCount = self.pasteboard.changeCount;
+
     //Check what is on the paste board
     if (! [self.pasteboard containsPasteboardTypes:[NSArray arrayWithObjects:@"public.utf8-plain-text", @"public.text", nil]]){
         return NO;
     }
     
     NSString *url = self.pasteboard.string;
-    if ([url isEqualToString:self.lastUrl]) {
-        return NO;
-    }
-    
+
     NSLog(@"message: %@", url);
 
     BOOL saved = NO;
@@ -107,8 +110,6 @@
         saved = YES;
     }
     
-    self.lastUrl = url;
-
     return saved;
 }
 
