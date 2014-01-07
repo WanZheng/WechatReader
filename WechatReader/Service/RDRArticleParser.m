@@ -44,11 +44,19 @@
                                                                                       options:0
                                                                                         error:&error1];
                                if (! [result isKindOfClass:[NSDictionary class]]) {
-                                   NSLog(@"Failed to decode, data=%@, error=%@", data, error1);
+                                   NSLog(@"Failed to decode, data='%@', error=%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding], error1);
                                    return;
                                }
 
-                               article.title = [result objectForKey:@"Title"];
+                               NSString *title = [result objectForKey:@"Title"];
+                               NSString *imageUrl = [result objectForKey:@"ImageUrl"];
+                               if (title.length > 0) {
+                                   article.title = title;
+                               }
+                               if (imageUrl.length > 0) {
+                                   article.imageUrl = imageUrl;
+                               }
+
                                error1 = nil;
                                if (! [article.managedObjectContext save:&error1]) {
                                    NSLog(@"Failed to save article=%@, error=%@", article, error1);

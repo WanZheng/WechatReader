@@ -8,6 +8,8 @@
 
 #import "RDRIndexViewController.h"
 #import "RDRContentViewController.h"
+#import "RDRConfig.h"
+#import "UIImageView+RDRAsyncDownload.h"
 
 @interface RDRIndexViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -38,7 +40,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.title = @"微信阅读器";
+#ifndef CONFIG_APP_NAME
+#   define CONFIG_APP_NAME (@"微信阅读器")
+#endif
+    self.title = CONFIG_APP_NAME;
 
     [self.tableView reloadData];
 }
@@ -63,10 +68,15 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (article.title) {
+    if (article.title.length > 0) {
         cell.textLabel.text = article.title;
     }else{
         cell.textLabel.text = article.url;
+    }
+
+    NSString *imageUrl = article.imageUrl;
+    if (imageUrl.length > 0) {
+        [cell.imageView setImageWithURL:[[NSURL alloc] initWithString:imageUrl]];
     }
 }
 

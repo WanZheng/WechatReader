@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818796CA8D42E83FD00429F /* RDRArticleParser.m */; };
+		1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */; };
 		181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
 		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
@@ -41,8 +42,10 @@
 /* Begin PBXFileReference section */
 		181872811EB6EB6FC3D95EAB /* RDRConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRConfig.h; sourceTree = "<group>"; };
 		181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
+		181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RDRAsyncDownload.m"; sourceTree = "<group>"; };
 		1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArticleParser.h; sourceTree = "<group>"; };
 		1818796CA8D42E83FD00429F /* RDRArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArticleParser.m; sourceTree = "<group>"; };
+		18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RDRAsyncDownload.h"; sourceTree = "<group>"; };
 		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
@@ -106,6 +109,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		181876552DD1DE0822706237 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */,
+				18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		8B936450187831AC00175262 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +170,7 @@
 				8BD8493D1878166A00F072E1 /* Supporting Files */,
 				1818701B95D8FD8E31204CE8 /* Service */,
 				181872811EB6EB6FC3D95EAB /* RDRConfig.h */,
+				181876552DD1DE0822706237 /* Category */,
 			);
 			path = WechatReader;
 			sourceTree = "<group>";
@@ -306,6 +319,7 @@
 				8B936453187831E400175262 /* RDRArticle.m in Sources */,
 				181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */,
 				181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */,
+				1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +365,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -390,7 +403,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -454,7 +466,6 @@
 		8BD849631878166B00F072E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WechatReader.app/WechatReader";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -477,7 +488,6 @@
 		8BD849641878166B00F072E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WechatReader.app/WechatReader";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
