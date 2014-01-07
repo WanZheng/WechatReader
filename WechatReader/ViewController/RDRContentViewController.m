@@ -31,7 +31,8 @@
     self.webView.frame = self.view.bounds;
     [self.view addSubview:self.webView];
     
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.article.url]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.article.url]];
+    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     [self.webView loadRequest:request];
 }
 
@@ -50,7 +51,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 
-    if (self.article.title == nil) {
+    if (self.article.title.length <= 0) {
         self.article.title = self.title;
 
         NSError *error;
@@ -69,6 +70,11 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     // TODO:
     NSLog(@"load error: %@", error);
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSLog(@"webview|start load:%@, navigationType=%d", request.URL.absoluteString, navigationType);
+    return YES;
 }
 
 @end

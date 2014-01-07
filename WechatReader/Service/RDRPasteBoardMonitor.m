@@ -7,6 +7,7 @@
 //
 
 #import "RDRPasteBoardMonitor.h"
+#import "RDRConfig.h"
 #import "RDRArticle.h"
 #import "RDRAppDelegate.h"
 #import "RDRArticleParser.h"
@@ -78,6 +79,16 @@
     return nil;
 }
 
+- (RDRArticle *)insertNewArticleWithUrl:(NSString *)url {
+    RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
+                                                          inManagedObjectContext:self.managedObjectContext];
+    article.url = url;
+
+    NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url relativeToURL:nil]] returningResponse:nil error:nil];
+    NSLog(@"data = %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    return article;
+}
+
 - (BOOL)checkImmediately {
     if (self.pasteboard.changeCount == self.changeCount) {
         return NO;
@@ -98,9 +109,7 @@
         RDRArticle *article = [self findArticleByUrl:url];
 
         if (article == nil) {
-            article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
-                                                                  inManagedObjectContext:self.managedObjectContext];
-            article.url = url;
+            article = [self insertNewArticleWithUrl:url];
         }
 
         article.ctime = [NSDate date];
@@ -148,7 +157,7 @@
         return NO;
     }
     
-#if 1
+#ifndef CONFIG_NOT_WEIXIN_ONLY
     if ([url rangeOfString:@"mp.weixin.qq.com/"].length > 0) {
         return YES;
     }

@@ -10,6 +10,7 @@
 		181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818796CA8D42E83FD00429F /* RDRArticleParser.m */; };
 		1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */; };
 		181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */; };
+		18187F3CB647193E534D41CD /* RDRURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187C32069F107A809D9003 /* RDRURLCache.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
 		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
 		8B81462018795DC400EE43FF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B81461F18795DC400EE43FF /* CoreData.framework */; };
@@ -46,6 +47,8 @@
 		1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArticleParser.h; sourceTree = "<group>"; };
 		1818796CA8D42E83FD00429F /* RDRArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArticleParser.m; sourceTree = "<group>"; };
 		18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RDRAsyncDownload.h"; sourceTree = "<group>"; };
+		18187C32069F107A809D9003 /* RDRURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRURLCache.m; sourceTree = "<group>"; };
+		18187D29D6D2A33D76223495 /* RDRURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRURLCache.h; sourceTree = "<group>"; };
 		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
@@ -105,6 +108,8 @@
 				18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */,
 				1818796CA8D42E83FD00429F /* RDRArticleParser.m */,
 				1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */,
+				18187C32069F107A809D9003 /* RDRURLCache.m */,
+				18187D29D6D2A33D76223495 /* RDRURLCache.h */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */,
 				181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */,
 				1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */,
+				18187F3CB647193E534D41CD /* RDRURLCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

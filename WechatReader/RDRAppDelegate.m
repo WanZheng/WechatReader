@@ -11,6 +11,7 @@
 #import "RDRIndexViewController.h"
 #import "RDRPasteBoardMonitor.h"
 #import "RDRArticleParser.h"
+#import "RDRURLCache.h"
 
 @interface RDRAppDelegate()
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -18,6 +19,7 @@
 @property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic) RDRPasteBoardMonitor *pasteBoardMonitor;
+@property (nonatomic) RDRURLCache *urlCache;
 
 @end
 
@@ -29,6 +31,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // URL Cache
+    self.urlCache = [[RDRURLCache alloc] init];
+    self.urlCache.oldSharedCache = [NSURLCache sharedURLCache];
+    [NSURLCache setSharedURLCache:self.urlCache];
+
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
