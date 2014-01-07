@@ -10,12 +10,15 @@
 #import "RDRAppDelegate.h"
 #import "RDRIndexViewController.h"
 #import "RDRPasteBoardMonitor.h"
+#import "RDRArticleParser.h"
 
 @interface RDRAppDelegate()
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 @property (nonatomic) RDRPasteBoardMonitor *pasteBoardMonitor;
+
 @end
 
 @implementation RDRAppDelegate
@@ -102,6 +105,13 @@
     notification.applicationIconBadgeNumber = 1;
 
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+- (RDRArticleParser *)articleParser {
+    if (_articleParser == nil) {
+        _articleParser = [[RDRArticleParser alloc] init];
+    }
+    return _articleParser;
 }
 
 #pragma mark - core data
