@@ -11,6 +11,10 @@
 #import "RDRConfig.h"
 #import "UIImageView+RDRAsyncDownload.h"
 
+static int TAG_TITLE = 1;
+static int TAG_SUBTITLE = 2;
+static int TAG_IMG = 3;
+
 @interface RDRIndexViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -66,53 +70,35 @@
     return [sectionInfo numberOfObjects];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80;
-}
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
-    int imageWidth = 80;
-
+    UILabel *title = (UILabel *) [cell.contentView viewWithTag:TAG_TITLE];
     if (article.title.length > 0) {
-        CGRect frame = cell.bounds;
-        frame.origin.x = 10;
-
-        if (article.imageUrl.length > 0) {
-            frame.size.width = cell.bounds.size.width - frame.origin.x - imageWidth;
-        }else{
-            frame.size.width = cell.bounds.size.width - frame.origin.x - 10;
-        }
-
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:frame];
-        textLabel.text = article.title;
-        textLabel.frame = frame;
-        textLabel.backgroundColor = [UIColor redColor];
-
-        [cell addSubview:textLabel];
+        title.hidden = NO;
+        title.text = article.title;
+    }else{
+        title.hidden = YES;
     }
 
-    NSString *subTitle = @"author";
-    if (subTitle.length > 0) {
-        cell.detailTextLabel.text = subTitle;
-        cell.detailTextLabel.backgroundColor = [UIColor blueColor];
+    NSString *author = @"author";
+    UILabel *subtitle = (UILabel *) [cell.contentView viewWithTag:TAG_SUBTITLE];
+    if (author.length > 0) {
+        subtitle.hidden = NO;
+        subtitle.text = author;
+    }else{
+        subtitle.hidden = YES;
     }
 
+
+    UIImageView *imgView = (UIImageView *) [cell.contentView viewWithTag:TAG_IMG];
     if (article.imageUrl.length > 0) {
-        CGRect frame = cell.bounds;
-        frame.origin.x = frame.size.width - imageWidth;
-        frame.size.width = imageWidth;
-        frame.size.height -= 1;
-
-        UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.frame = frame;
-        [imageView setImageWithURL:[[NSURL alloc] initWithString:article.imageUrl]];
-        [cell addSubview:imageView];
+        imgView.hidden = NO;
+        [imgView setImageWithURL:[[NSURL alloc] initWithString:article.imageUrl]];
+    }else{
+        // TODO: 如果没有照片，需拉长title
+        imgView.hidden = YES;
+        imgView.image = nil;
     }
 }
 
@@ -121,7 +107,26 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] init];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 220, 15)];
+        title.tag = TAG_TITLE;
+        title.font = [UIFont systemFontOfSize:14.0];
+        title.textColor = [UIColor blackColor];
+        title.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        [cell.contentView addSubview:title];
+
+        UILabel *subtitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 205, 25)];
+        subtitle.tag = TAG_SUBTITLE;
+        subtitle.font = [UIFont systemFontOfSize:12.0];
+        subtitle.textColor = [UIColor darkGrayColor];
+        subtitle.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+        [cell.contentView addSubview:subtitle];
+
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(240, 0, 80, 45)];
+        img.tag = TAG_IMG;
+        img.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [cell.contentView addSubview:img];
     }
 
     [self configureCell:cell atIndexPath:indexPath];
