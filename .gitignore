@@ -7,5 +7,6 @@ xcuserdata/
 
 /.idea/
 
+.DS_Store
 *~
 *.swp
