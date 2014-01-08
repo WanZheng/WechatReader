@@ -35,7 +35,7 @@
         [self stopTimer];
     }];
 
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2
                                                   target:self
                                                 selector:@selector(onTimer:)
                                                 userInfo:nil
@@ -125,8 +125,6 @@
 }
 
 - (void)onTimer:(NSTimer *)timer {
-    NSLog(@"on timer");
-
     BOOL saved = [self checkImmediately];
     if (saved) {
         [[RDRAppDelegate sharedInstance] showBanner:@"文章已收藏"];
@@ -134,7 +132,7 @@
     
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground){
         NSTimeInterval timeLeft = [UIApplication sharedApplication].backgroundTimeRemaining;
-        NSLog(@"Background time remaining: %.0f seconds (~%d mins)", timeLeft, (int)timeLeft / 60);
+        // NSLog(@"Background time remaining: %.0f seconds (~%d mins)", timeLeft, (int)timeLeft / 60);
 
         if (timeLeft < 5) {
             [[RDRAppDelegate sharedInstance] showBanner:@"即将退出，如需要请重新打开程序。"];

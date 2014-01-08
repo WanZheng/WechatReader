@@ -66,17 +66,53 @@
     return [sectionInfo numberOfObjects];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     RDRArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    int imageWidth = 80;
+
     if (article.title.length > 0) {
-        cell.textLabel.text = article.title;
-    }else{
-        cell.textLabel.text = article.url;
+        CGRect frame = cell.bounds;
+        frame.origin.x = 10;
+
+        if (article.imageUrl.length > 0) {
+            frame.size.width = cell.bounds.size.width - frame.origin.x - imageWidth;
+        }else{
+            frame.size.width = cell.bounds.size.width - frame.origin.x - 10;
+        }
+
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:frame];
+        textLabel.text = article.title;
+        textLabel.frame = frame;
+        textLabel.backgroundColor = [UIColor redColor];
+
+        [cell addSubview:textLabel];
     }
 
-    NSString *imageUrl = article.imageUrl;
-    if (imageUrl.length > 0) {
-        [cell.imageView setImageWithURL:[[NSURL alloc] initWithString:imageUrl]];
+    NSString *subTitle = @"author";
+    if (subTitle.length > 0) {
+        cell.detailTextLabel.text = subTitle;
+        cell.detailTextLabel.backgroundColor = [UIColor blueColor];
+    }
+
+    if (article.imageUrl.length > 0) {
+        CGRect frame = cell.bounds;
+        frame.origin.x = frame.size.width - imageWidth;
+        frame.size.width = imageWidth;
+        frame.size.height -= 1;
+
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.frame = frame;
+        [imageView setImageWithURL:[[NSURL alloc] initWithString:article.imageUrl]];
+        [cell addSubview:imageView];
     }
 }
 

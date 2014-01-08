@@ -15,6 +15,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         dispatch_async(dispatch_get_main_queue(), ^{
+            refSelf.contentMode = UIViewContentModeScaleAspectFill;
             [refSelf setImage:[UIImage imageWithData:imageData]];
         });
     });
