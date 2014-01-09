@@ -5,7 +5,6 @@
 
 #import "RDRArticleParser.h"
 #import "RDRArticle.h"
-#import "RDRConfig.h"
 
 
 @interface RDRArticleParser()

@@ -7,7 +7,6 @@
 //
 
 #import "RDRPasteBoardMonitor.h"
-#import "RDRConfig.h"
 #import "RDRArticle.h"
 #import "RDRAppDelegate.h"
 #import "RDRArticleParser.h"
@@ -83,9 +82,6 @@
     RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
                                                           inManagedObjectContext:self.managedObjectContext];
     article.url = url;
-
-    NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url relativeToURL:nil]] returningResponse:nil error:nil];
-    NSLog(@"data = %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     return article;
 }
 

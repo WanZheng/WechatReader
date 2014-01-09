@@ -30,7 +30,11 @@
     self.webView.delegate = self;
     self.webView.frame = self.view.bounds;
     [self.view addSubview:self.webView];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.article.url]];
     request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     [self.webView loadRequest:request];

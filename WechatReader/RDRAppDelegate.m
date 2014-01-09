@@ -31,10 +31,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // URL Cache
-    self.urlCache = [[RDRURLCache alloc] init];
-    self.urlCache.oldSharedCache = [NSURLCache sharedURLCache];
-    [NSURLCache setSharedURLCache:self.urlCache];
+    [self setupURLCache];
 
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -122,6 +119,12 @@
     return _articleParser;
 }
 
+- (void)setupURLCache {
+    self.urlCache = [[RDRURLCache alloc] init];
+    self.urlCache.oldSharedCache = [NSURLCache sharedURLCache];
+    [NSURLCache setSharedURLCache:self.urlCache];
+}
+
 #pragma mark - core data
 - (void)saveContext
 {
@@ -167,7 +170,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Articles.CDBStore"];
+    NSURL *storeURL = [[[self class] applicationDocumentsDirectory] URLByAppendingPathComponent:@"Articles.CDBStore"];
     
     NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
@@ -204,7 +207,7 @@
     return _persistentStoreCoordinator;
 }
 
-- (NSURL *)applicationDocumentsDirectory
++ (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }

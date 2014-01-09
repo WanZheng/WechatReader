@@ -17,6 +17,7 @@
 @property (nonatomic) RDRArticleParser *articleParser;
 
 + (RDRAppDelegate *)sharedInstance;
++ (NSURL *)applicationDocumentsDirectory;
 
 - (void)showBanner:(NSString *)text;
 
