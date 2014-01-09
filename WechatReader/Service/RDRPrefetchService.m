@@ -9,8 +9,9 @@
 #import "RDRPasteBoardMonitor.h"
 
 
-@interface RDRPrefetchService()
+@interface RDRPrefetchService() <UIWebViewDelegate>
 @property (nonatomic) UIWebView *webView;
+@property (nonatomic) NSMutableArray *urlList;
 @end
 
 @implementation RDRPrefetchService
@@ -26,15 +27,76 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (NSMutableArray *)urlList {
+    if (_urlList == nil) {
+        _urlList = [NSMutableArray array];
+    }
+    return _urlList;
+}
+
+- (UIWebView *)webView {
+    if (_webView == nil) {
+        _webView = [[UIWebView alloc] init];
+        _webView.delegate = self;
+    }
+    return _webView;
+}
+
 - (void)didAddArticle:(NSNotification *)notification {
     NSString *url = [notification.userInfo objectForKey:kKeyUrl];
     assert([url isKindOfClass:[NSString class]]);
 
+    [self.urlList addObject:url];
+
+    if (self.urlList.count <= 1) {
+        [self prefetchUrl:url];
+    }
+}
+
+- (void)prefetchUrl:(NSString *)url {
+    NSLog(@"start prefetch: %@", url);
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[[NSURL alloc] initWithString:url]];
     request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
 
-    self.webView = [[UIWebView alloc] init];
     [self.webView loadRequest:request];
+}
+
+- (void)prefetchNextUrl {
+    if (self.urlList.count <= 0) {
+        return;
+    }
+    [self.urlList removeObjectAtIndex:0];
+
+    if (self.urlList.count <= 0) {
+        return;
+    }
+    [self prefetchUrl:self.urlList.firstObject];
+}
+
+#pragma mark - UIWebViewDelegate
+//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+//    return YES;
+//}
+//
+//- (void)webViewDidStartLoad:(UIWebView *)webView {
+//    NSLog(@"start prefetch");
+//}
+//
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"prefetch finished");
+
+    [self prefetchNextUrl];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"prefetch failed: %@", error);
+
+    [self prefetchNextUrl];
 }
 
 @end
