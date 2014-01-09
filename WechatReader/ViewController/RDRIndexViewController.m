@@ -124,6 +124,8 @@ static int TAG_IMG = 3;
 
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(240, 0, 80, 45)];
         img.tag = TAG_IMG;
+        img.contentMode = UIViewContentModeScaleAspectFill;
+        img.clipsToBounds = YES;
         img.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [cell.contentView addSubview:img];
     }

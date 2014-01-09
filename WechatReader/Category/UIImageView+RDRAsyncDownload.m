@@ -20,7 +20,6 @@
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError){
-                                   refSelf.contentMode = UIViewContentModeScaleAspectFill;
                                    [refSelf setImage:[UIImage imageWithData:data]];
                                }];
     });
