@@ -11,6 +11,9 @@
 #import "RDRAppDelegate.h"
 #import "RDRArticleParser.h"
 
+NSString *kNotificationDidInsertArticle = @"did insert article";
+NSString    *kKeyUrl = @"url";
+
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
 @property (nonatomic) NSTimer *timer;
@@ -78,6 +81,18 @@
     return nil;
 }
 
+- (RDRArticle *)insertNewArticleWithUrl:(NSString *)url {
+    RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
+                                                          inManagedObjectContext:self.managedObjectContext];
+    article.url = url;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidInsertArticle
+                                                        object:nil
+                                                      userInfo:@{kKeyUrl: url}];
+
+    return article;
+}
+
 - (BOOL)checkImmediately {
     if (self.pasteboard.changeCount == self.changeCount) {
         return NO;
@@ -98,9 +113,7 @@
         RDRArticle *article = [self findArticleByUrl:url];
 
         if (article == nil) {
-            article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
-                                                                  inManagedObjectContext:self.managedObjectContext];
-            article.url = url;
+            article = [self insertNewArticleWithUrl:url];
         }
 
         article.ctime = [NSDate date];
@@ -146,7 +159,7 @@
         return NO;
     }
     
-#if 1
+#ifndef CONFIG_NOT_WEIXIN_ONLY
     if ([url rangeOfString:@"mp.weixin.qq.com/"].length > 0) {
         return YES;
     }

@@ -8,7 +8,6 @@
 
 #import "RDRIndexViewController.h"
 #import "RDRContentViewController.h"
-#import "RDRConfig.h"
 #import "UIImageView+RDRAsyncDownload.h"
 
 static int TAG_TITLE = 1;

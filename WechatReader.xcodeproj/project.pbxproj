@@ -10,8 +10,14 @@
 		181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818796CA8D42E83FD00429F /* RDRArticleParser.m */; };
 		1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */; };
 		181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */; };
+		181876C9E1FB89832155F0A5 /* safe_dispatch_queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */; };
+		18187AEBB6C7740973E70336 /* RDRPrefetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187B11108457D426082DE8 /* RDRPrefetchService.m */; };
+		18187BE5275D6B9591278A61 /* RDRURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818729A50B8608EC3F928F1 /* RDRURLCache.m */; };
+		18187EFF417675F90C390DD7 /* RDRCacheEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187C990EA42D215A60CCB7 /* RDRCacheEntity.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
 		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
+		8B5C68E0187E829F00FF0E3E /* URLCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B5C68DE187E829F00FF0E3E /* URLCache.xcdatamodeld */; };
+		8B5C68E8187EB39D00FF0E3E /* PrefetchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5C68E7187EB39D00FF0E3E /* PrefetchTests.m */; };
 		8B81462018795DC400EE43FF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B81461F18795DC400EE43FF /* CoreData.framework */; };
 		8B936453187831E400175262 /* RDRArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B936452187831E400175262 /* RDRArticle.m */; };
 		8BD849371878166A00F072E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD849361878166A00F072E1 /* Foundation.framework */; };
@@ -41,15 +47,25 @@
 
 /* Begin PBXFileReference section */
 		181872811EB6EB6FC3D95EAB /* RDRConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRConfig.h; sourceTree = "<group>"; };
+		1818729A50B8608EC3F928F1 /* RDRURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRURLCache.m; sourceTree = "<group>"; };
+		181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = safe_dispatch_queue.m; sourceTree = "<group>"; };
 		181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
 		181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RDRAsyncDownload.m"; sourceTree = "<group>"; };
 		1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRArticleParser.h; sourceTree = "<group>"; };
 		1818796CA8D42E83FD00429F /* RDRArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArticleParser.m; sourceTree = "<group>"; };
 		18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RDRAsyncDownload.h"; sourceTree = "<group>"; };
+		18187AFBFDF278C4C453A139 /* safe_dispatch_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safe_dispatch_queue.h; sourceTree = "<group>"; };
+		18187B11108457D426082DE8 /* RDRPrefetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPrefetchService.m; sourceTree = "<group>"; };
+		18187B822BBBBEADE5EAF8C2 /* RDRCacheEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRCacheEntity.h; sourceTree = "<group>"; };
+		18187C990EA42D215A60CCB7 /* RDRCacheEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRCacheEntity.m; sourceTree = "<group>"; };
+		18187D5E89DF386A3052F11C /* RDRURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRURLCache.h; sourceTree = "<group>"; };
 		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
+		18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPrefetchService.h; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
 		8B47AE9318795AC300189F0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		8B5C68DF187E829F00FF0E3E /* URLCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLCache.xcdatamodel; sourceTree = "<group>"; };
+		8B5C68E7187EB39D00FF0E3E /* PrefetchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefetchTests.m; sourceTree = "<group>"; };
 		8B81461F18795DC400EE43FF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8B936451187831E400175262 /* RDRArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRArticle.h; path = Model/RDRArticle.h; sourceTree = "<group>"; };
 		8B936452187831E400175262 /* RDRArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRArticle.m; path = Model/RDRArticle.m; sourceTree = "<group>"; };
@@ -105,8 +121,22 @@
 				18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */,
 				1818796CA8D42E83FD00429F /* RDRArticleParser.m */,
 				1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */,
+				18187B11108457D426082DE8 /* RDRPrefetchService.m */,
+				18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		1818715B46CC8C6D4D623836 /* URLCache */ = {
+			isa = PBXGroup;
+			children = (
+				1818729A50B8608EC3F928F1 /* RDRURLCache.m */,
+				18187D5E89DF386A3052F11C /* RDRURLCache.h */,
+				18187C990EA42D215A60CCB7 /* RDRCacheEntity.m */,
+				18187B822BBBBEADE5EAF8C2 /* RDRCacheEntity.h */,
+				8B5C68DE187E829F00FF0E3E /* URLCache.xcdatamodeld */,
+			);
+			path = URLCache;
 			sourceTree = "<group>";
 		};
 		181876552DD1DE0822706237 /* Category */ = {
@@ -114,6 +144,8 @@
 			children = (
 				181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */,
 				18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */,
+				181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */,
+				18187AFBFDF278C4C453A139 /* safe_dispatch_queue.h */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -121,6 +153,7 @@
 		8B936450187831AC00175262 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B47AE9218795AC300189F0D /* Model.xcdatamodeld */,
 				8B936451187831E400175262 /* RDRArticle.h */,
 				8B936452187831E400175262 /* RDRArticle.m */,
 			);
@@ -130,7 +163,6 @@
 		8BD8492A1878166A00F072E1 = {
 			isa = PBXGroup;
 			children = (
-				8B47AE9218795AC300189F0D /* Model.xcdatamodeld */,
 				8BD8493C1878166A00F072E1 /* WechatReader */,
 				8BD849551878166B00F072E1 /* WechatReaderTests */,
 				8BD849351878166A00F072E1 /* Frameworks */,
@@ -171,6 +203,7 @@
 				1818701B95D8FD8E31204CE8 /* Service */,
 				181872811EB6EB6FC3D95EAB /* RDRConfig.h */,
 				181876552DD1DE0822706237 /* Category */,
+				1818715B46CC8C6D4D623836 /* URLCache */,
 			);
 			path = WechatReader;
 			sourceTree = "<group>";
@@ -189,6 +222,7 @@
 		8BD849551878166B00F072E1 /* WechatReaderTests */ = {
 			isa = PBXGroup;
 			children = (
+				8B5C68E7187EB39D00FF0E3E /* PrefetchTests.m */,
 				8BD8495B1878166B00F072E1 /* WechatReaderTests.m */,
 				8BD849561878166B00F072E1 /* Supporting Files */,
 			);
@@ -315,11 +349,16 @@
 				8BD8496A187818C300F072E1 /* RDRIndexViewController.m in Sources */,
 				8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */,
 				8BD849431878166A00F072E1 /* main.m in Sources */,
+				8B5C68E0187E829F00FF0E3E /* URLCache.xcdatamodeld in Sources */,
 				8BD849471878166A00F072E1 /* RDRAppDelegate.m in Sources */,
 				8B936453187831E400175262 /* RDRArticle.m in Sources */,
 				181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */,
 				181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */,
 				1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */,
+				18187BE5275D6B9591278A61 /* RDRURLCache.m in Sources */,
+				18187EFF417675F90C390DD7 /* RDRCacheEntity.m in Sources */,
+				181876C9E1FB89832155F0A5 /* safe_dispatch_queue.m in Sources */,
+				18187AEBB6C7740973E70336 /* RDRPrefetchService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5C68E8187EB39D00FF0E3E /* PrefetchTests.m in Sources */,
 				8BD8495C1878166B00F072E1 /* WechatReaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,7 +583,17 @@
 			);
 			currentVersion = 8B47AE9318795AC300189F0D /* Model.xcdatamodel */;
 			name = Model.xcdatamodeld;
-			path = WechatReader/Model/Model.xcdatamodeld;
+			path = Model/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		8B5C68DE187E829F00FF0E3E /* URLCache.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B5C68DF187E829F00FF0E3E /* URLCache.xcdatamodel */,
+			);
+			currentVersion = 8B5C68DF187E829F00FF0E3E /* URLCache.xcdatamodel */;
+			path = URLCache.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
