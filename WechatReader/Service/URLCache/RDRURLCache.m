@@ -5,6 +5,7 @@
 //
 
 
+#import <CommonCrypto/CommonDigest.h>
 #import "RDRURLCache.h"
 #import "RDRCacheEntity.h"
 #import "RDRAppDelegate.h"
@@ -12,8 +13,6 @@
 
 
 @interface RDRURLCache()
-@property (nonatomic) NSMutableDictionary *dataMap; // 临时记录到内存
-
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -25,7 +24,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _dataMap = [NSMutableDictionary dictionary];
         _coreDataQueue = dispatch_create_safe_queue("URLCache", DISPATCH_QUEUE_SERIAL);
     }
 
@@ -37,22 +35,23 @@
         NSLog(@"Ignore storing request: %@", request);
         return;
     }
+    NSString *url = request.URL.absoluteString;
 
-    NSLog(@"storing cache: %@", request.URL.absoluteString);
+    NSLog(@"storing cache: %@", url);
     dispatch_async(self.coreDataQueue, ^{
         RDRCacheEntity *cache = (RDRCacheEntity *) [NSEntityDescription insertNewObjectForEntityForName:@"CacheEntity"
                                                                                  inManagedObjectContext:self.managedObjectContext];
-        cache.url = request.URL.absoluteString;
+        cache.url = url;
         cache.ctime = [NSDate date];
         cache.textEncodingName = cachedResponse.response.textEncodingName;
         cache.expectedContentLength = [NSNumber numberWithLongLong:cachedResponse.response.expectedContentLength];
         cache.mimeType = cachedResponse.response.MIMEType;
 
-        [self.dataMap setObject:cachedResponse.data forKey:request.URL.absoluteString];
+        [self writeCache:cachedResponse.data withUrl:url];
 
         NSError *error;
         if (! [cache.managedObjectContext save:&error]) {
-            NSLog(@"Failed to save cache|request=%@, error=%@", request.URL.absoluteString, error);
+            NSLog(@"Failed to save cache|request=%@, error=%@", url, error);
         }
     });
 }
@@ -61,10 +60,11 @@
     if (! [request.HTTPMethod isEqualToString:@"GET"]) {
         return nil;
     }
+    NSString *url = request.URL.absoluteString;
 
     __block NSURLResponse *response = nil;
     dispatch_safe_sync(self.coreDataQueue, ^{
-        RDRCacheEntity *entity = [self findCacheEntityByUrl:request.URL.absoluteString];
+        RDRCacheEntity *entity = [self findCacheEntityByUrl:url];
         if (entity == nil) {
             return;
         }
@@ -75,18 +75,20 @@
                                                     textEncodingName:entity.textEncodingName];
     });
     if (response == nil) {
-        NSLog(@"cache not found: %@", request.URL.absoluteString);
+        NSLog(@"cache not found: %@", url);
         return nil;
     }
 
-    NSData *data = [self.dataMap objectForKey:request.URL.absoluteString];
+    NSData *data = [self readCacheWithUrl:url];
     if (data == nil) {
-        NSLog(@"data not found: %@", request.URL.absoluteString);
+        NSLog(@"data not found, remove it: %@", url);
+
+        [self removeCacheWithUrl:url];
         return nil;
     }
     NSCachedURLResponse *cachedURLResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data];
 
-    NSLog(@"found cache for: %@", request.URL.absoluteString);
+    NSLog(@"found cache for: %@", url);
     return cachedURLResponse;
 }
 
@@ -98,6 +100,65 @@
 - (void)removeAllCachedResponses {
     NSLog(@"remove all cache");
     [super removeAllCachedResponses];
+}
+
+- (void)removeCacheWithUrl:(NSString *)url {
+    dispatch_async(self.coreDataQueue, ^{
+        // TODO:
+    });
+}
+
+#pragma mark - disk files
+- (NSURL *)urlCacheDirectory {
+    NSURL *cacheDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+    return [cacheDirectory URLByAppendingPathComponent:@"URLCache"];
+}
+
+- (NSURL *)pathForCacheOfUrl:(NSString *)url {
+    const char *cstr = url.UTF8String;
+    unsigned char md5[16];
+    CC_MD5(cstr, strlen(cstr), md5);
+
+    char cstrMd5[2*sizeof(md5)+1];
+    for (size_t i=0; i<sizeof(md5); i++) {
+        cstrMd5[2*i] = (md5[i] / 16) + 'a';
+        cstrMd5[2*i+1] = (md5[i] % 16) + 'a';
+    }
+    cstrMd5[2*sizeof(md5)] = 0;
+
+    NSString *strMd5 = [NSString stringWithCString:cstrMd5 encoding:NSASCIIStringEncoding];
+
+    NSURL *ret = [[[self urlCacheDirectory]
+            URLByAppendingPathComponent:[strMd5 substringToIndex:2]]
+            URLByAppendingPathComponent:strMd5];
+    return ret;
+}
+
+- (void)writeCache:(NSData *)data withUrl:(NSString *)url {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSURL *filePath = [self pathForCacheOfUrl:url];
+        NSURL *parent = [filePath URLByDeletingLastPathComponent];
+        NSError *error;
+        if (! [[NSFileManager defaultManager] createDirectoryAtURL:parent
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:&error]){
+            NSLog(@"Failed to create path:'%@', error=%@", parent, error);
+            return;
+        }
+
+        [[NSFileManager defaultManager] removeItemAtURL:filePath error:nil];
+        if (![data writeToURL:filePath options:NSDataWritingWithoutOverwriting error:&error])
+        if (![data writeToURL:filePath atomically:YES]) {
+            NSLog(@"Failed to write file:'%@', error=%@", filePath, error);
+            return;
+        }
+    });
+}
+
+- (NSData *)readCacheWithUrl:(NSString *)url {
+    NSURL *filePath = [self pathForCacheOfUrl:url];
+    return [NSData dataWithContentsOfURL:filePath];
 }
 
 #pragma mark - core data
