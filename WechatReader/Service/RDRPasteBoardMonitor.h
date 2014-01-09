@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString *kNotificationDidInsertArticle;
+extern NSString    *kKeyUrl;
+
 @interface RDRPasteBoardMonitor : NSObject
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
 

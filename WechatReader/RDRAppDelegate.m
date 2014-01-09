@@ -12,6 +12,7 @@
 #import "RDRPasteBoardMonitor.h"
 #import "RDRArticleParser.h"
 #import "RDRURLCache.h"
+#import "RDRPrefetchService.h"
 
 @interface RDRAppDelegate()
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -20,6 +21,7 @@
 
 @property (nonatomic) RDRPasteBoardMonitor *pasteBoardMonitor;
 @property (nonatomic) RDRURLCache *urlCache;
+@property (nonatomic) RDRPrefetchService *prefetchService;
 
 @end
 
@@ -31,9 +33,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setupURLCache];
-
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
@@ -43,6 +42,12 @@
     self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    // 延迟初始化
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setupURLCache];
+        self.prefetchService = [[RDRPrefetchService alloc] init];
+    });
 
     return YES;
 }

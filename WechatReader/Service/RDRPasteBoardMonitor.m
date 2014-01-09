@@ -11,6 +11,9 @@
 #import "RDRAppDelegate.h"
 #import "RDRArticleParser.h"
 
+NSString *kNotificationDidInsertArticle = @"did insert article";
+NSString    *kKeyUrl = @"url";
+
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
 @property (nonatomic) NSTimer *timer;
@@ -82,6 +85,11 @@
     RDRArticle *article = (RDRArticle *)[NSEntityDescription insertNewObjectForEntityForName:@"Article"
                                                           inManagedObjectContext:self.managedObjectContext];
     article.url = url;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidInsertArticle
+                                                        object:nil
+                                                      userInfo:@{kKeyUrl: url}];
+
     return article;
 }
 

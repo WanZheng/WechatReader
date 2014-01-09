@@ -11,6 +11,7 @@
 		1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */; };
 		181875EFF69BAF0C7798F63F /* RDRPasteBoardMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */; };
 		181876C9E1FB89832155F0A5 /* safe_dispatch_queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */; };
+		18187AEBB6C7740973E70336 /* RDRPrefetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187B11108457D426082DE8 /* RDRPrefetchService.m */; };
 		18187BE5275D6B9591278A61 /* RDRURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818729A50B8608EC3F928F1 /* RDRURLCache.m */; };
 		18187EFF417675F90C390DD7 /* RDRCacheEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187C990EA42D215A60CCB7 /* RDRCacheEntity.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
@@ -53,10 +54,12 @@
 		1818796CA8D42E83FD00429F /* RDRArticleParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRArticleParser.m; sourceTree = "<group>"; };
 		18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RDRAsyncDownload.h"; sourceTree = "<group>"; };
 		18187AFBFDF278C4C453A139 /* safe_dispatch_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safe_dispatch_queue.h; sourceTree = "<group>"; };
+		18187B11108457D426082DE8 /* RDRPrefetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPrefetchService.m; sourceTree = "<group>"; };
 		18187B822BBBBEADE5EAF8C2 /* RDRCacheEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRCacheEntity.h; sourceTree = "<group>"; };
 		18187C990EA42D215A60CCB7 /* RDRCacheEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRCacheEntity.m; sourceTree = "<group>"; };
 		18187D5E89DF386A3052F11C /* RDRURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRURLCache.h; sourceTree = "<group>"; };
 		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
+		18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPrefetchService.h; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
 		8B47AE9318795AC300189F0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */,
 				1818796CA8D42E83FD00429F /* RDRArticleParser.m */,
 				1818771BA72360F22D4DDAC8 /* RDRArticleParser.h */,
+				18187B11108457D426082DE8 /* RDRPrefetchService.m */,
+				18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				18187BE5275D6B9591278A61 /* RDRURLCache.m in Sources */,
 				18187EFF417675F90C390DD7 /* RDRCacheEntity.m in Sources */,
 				181876C9E1FB89832155F0A5 /* safe_dispatch_queue.m in Sources */,
+				18187AEBB6C7740973E70336 /* RDRPrefetchService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
