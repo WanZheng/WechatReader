@@ -6,7 +6,8 @@
 
 
 #import "RDRPrefetchService.h"
-#import "RDRPasteBoardMonitor.h"
+#import "UIWebView+RDRQueryTitle.h"
+#import "RDRNotifications.h"
 
 
 @interface RDRPrefetchService() <UIWebViewDelegate>
@@ -47,23 +48,24 @@
 }
 
 - (void)didAddArticle:(NSNotification *)notification {
-    NSString *url = [notification.userInfo objectForKey:kKeyUrl];
-    assert([url isKindOfClass:[NSString class]]);
-
-    [self.urlList addObject:url];
+    [self.urlList addObject:notification.userInfo];
 
     if (self.urlList.count <= 1) {
-        [self prefetchUrl:url];
+        [self prefetchUrl:notification.userInfo];
     }
 }
 
-- (void)prefetchUrl:(NSString *)url {
-    NSLog(@"start prefetch: %@", url);
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[[NSURL alloc] initWithString:url]];
-    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+- (void)prefetchUrl:(NSDictionary *)userInfo {
+    NSLog(@"start prefetch: %@", userInfo);
+    NSString *url = [userInfo objectForKey:kKeyUrl];
+    assert([url isKindOfClass:[NSString class]]);
 
-    [self.webView loadRequest:request];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[[NSURL alloc] initWithString:url]];
+        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+
+        [self.webView loadRequest:request];
+    });
 }
 
 - (void)prefetchNextUrl {
@@ -89,6 +91,17 @@
 //
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"prefetch finished");
+
+    if (self.urlList.count >= 1) {
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:self.urlList.firstObject];
+        [userInfo setObject:webView.htmlTitle forKey:kKeyTitle];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidFetchTitle
+                                                                object:nil
+                                                              userInfo:userInfo];
+        });
+    }
 
     [self prefetchNextUrl];
 }

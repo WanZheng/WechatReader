@@ -9,4 +9,5 @@
 
 
 @interface RDRPrefetchService : NSObject
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 @end

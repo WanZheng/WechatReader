@@ -7,6 +7,7 @@
 //
 
 #import "RDRContentViewController.h"
+#import "UIWebView+RDRQueryTitle.h"
 
 @interface RDRContentViewController () <UIWebViewDelegate>
 @property (nonatomic) UIWebView *webView;
@@ -53,7 +54,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title = webView.htmlTitle;
 
     if (self.article.title.length <= 0) {
         self.article.title = self.title;

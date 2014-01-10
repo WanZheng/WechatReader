@@ -10,9 +10,8 @@
 #import "RDRArticle.h"
 #import "RDRAppDelegate.h"
 #import "RDRArticleParser.h"
+#import "RDRNotifications.h"
 
-NSString *kNotificationDidInsertArticle = @"did insert article";
-NSString    *kKeyUrl = @"url";
 
 @interface RDRPasteBoardMonitor()
 @property (nonatomic) UIPasteboard *pasteboard;
@@ -88,7 +87,7 @@ NSString    *kKeyUrl = @"url";
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidInsertArticle
                                                         object:nil
-                                                      userInfo:@{kKeyUrl: url}];
+                                                      userInfo:@{kKeyObjectID: article.objectID, kKeyUrl: url}];
 
     return article;
 }

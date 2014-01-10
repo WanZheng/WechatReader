@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18187148424EA3CF4572982F /* UIWebView+RDRQueryTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187DCC29B40A5A70B236D7 /* UIWebView+RDRQueryTitle.m */; };
 		181872BE0C9BC116DBE8DF3A /* RDRArticleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818796CA8D42E83FD00429F /* RDRArticleParser.m */; };
 		1818736A1AF213CCF9B60E45 /* UIImageView+RDRAsyncDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */; };
 		18187518E2205E46580D05F8 /* RDRURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 181875EF4B0AA72381CEB8BD /* RDRURLCache.m */; };
@@ -14,6 +15,7 @@
 		181876C9E1FB89832155F0A5 /* safe_dispatch_queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */; };
 		1818778456EA91162283B407 /* URLCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1818722B783F71A23CA2147D /* URLCache.xcdatamodeld */; };
 		1818789E73E6370B30D33C17 /* RDRCacheEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1818778EBE34B70CA4CCDCAB /* RDRCacheEntity.m */; };
+		1818798140ED2A10E5DB4327 /* RDRNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187F7B5B2B018E71C15EC6 /* RDRNotifications.m */; };
 		18187AEBB6C7740973E70336 /* RDRPrefetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18187B11108457D426082DE8 /* RDRPrefetchService.m */; };
 		8B47AE9118784E5F00189F0D /* RDRContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9018784E5F00189F0D /* RDRContentViewController.m */; };
 		8B47AE9418795AC300189F0D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B47AE9218795AC300189F0D /* Model.xcdatamodeld */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		181872811EB6EB6FC3D95EAB /* RDRConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRConfig.h; sourceTree = "<group>"; };
+		181873003EE3288330F3A5DD /* RDRNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRNotifications.h; sourceTree = "<group>"; };
+		181873CA63B87825A88039F2 /* UIWebView+RDRQueryTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+RDRQueryTitle.h"; sourceTree = "<group>"; };
 		181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = safe_dispatch_queue.m; sourceTree = "<group>"; };
 		181874B25BB3A9580D12B795 /* RDRPasteBoardMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPasteBoardMonitor.m; sourceTree = "<group>"; };
 		181875AED5508DB0FDA09FC3 /* UIImageView+RDRAsyncDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RDRAsyncDownload.m"; sourceTree = "<group>"; };
@@ -59,9 +63,11 @@
 		18187AFBFDF278C4C453A139 /* safe_dispatch_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safe_dispatch_queue.h; sourceTree = "<group>"; };
 		18187B11108457D426082DE8 /* RDRPrefetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRPrefetchService.m; sourceTree = "<group>"; };
 		18187DB28CA741A68E2AA73F /* RDRURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRURLCache.h; sourceTree = "<group>"; };
+		18187DCC29B40A5A70B236D7 /* UIWebView+RDRQueryTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+RDRQueryTitle.m"; sourceTree = "<group>"; };
 		18187E421B765226865BDD2D /* RDRPasteBoardMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPasteBoardMonitor.h; sourceTree = "<group>"; };
 		18187E97AC831D6FA5A69D13 /* URLCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = URLCache.xcdatamodel; sourceTree = "<group>"; };
 		18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDRPrefetchService.h; sourceTree = "<group>"; };
+		18187F7B5B2B018E71C15EC6 /* RDRNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDRNotifications.m; sourceTree = "<group>"; };
 		8B47AE8F18784E5F00189F0D /* RDRContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RDRContentViewController.h; path = ViewController/RDRContentViewController.h; sourceTree = "<group>"; };
 		8B47AE9018784E5F00189F0D /* RDRContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RDRContentViewController.m; path = ViewController/RDRContentViewController.m; sourceTree = "<group>"; };
 		8B47AE9318795AC300189F0D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -124,6 +130,8 @@
 				18187B11108457D426082DE8 /* RDRPrefetchService.m */,
 				18187EA0DCEFC740FCD01491 /* RDRPrefetchService.h */,
 				18187655852E9A3D9130F5D1 /* URLCache */,
+				18187F7B5B2B018E71C15EC6 /* RDRNotifications.m */,
+				181873003EE3288330F3A5DD /* RDRNotifications.h */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -135,6 +143,8 @@
 				18187AF473ADF4A76F539184 /* UIImageView+RDRAsyncDownload.h */,
 				181873FCEF8653F370DB2FDB /* safe_dispatch_queue.m */,
 				18187AFBFDF278C4C453A139 /* safe_dispatch_queue.h */,
+				18187DCC29B40A5A70B236D7 /* UIWebView+RDRQueryTitle.m */,
+				181873CA63B87825A88039F2 /* UIWebView+RDRQueryTitle.h */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -359,6 +369,8 @@
 				18187518E2205E46580D05F8 /* RDRURLCache.m in Sources */,
 				1818789E73E6370B30D33C17 /* RDRCacheEntity.m in Sources */,
 				1818778456EA91162283B407 /* URLCache.xcdatamodeld in Sources */,
+				18187148424EA3CF4572982F /* UIWebView+RDRQueryTitle.m in Sources */,
+				1818798140ED2A10E5DB4327 /* RDRNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
