@@ -12,10 +12,13 @@ extern NSString *kNotificationDidInsertArticle;
 extern NSString    *kKeyObjectID;
 extern NSString    *kKeyUrl;
 
-extern NSString *kNotificationDidFetchTitle;
+extern NSString *kNotificationDidPrefetchArticle;
 /*     NSString    *kKeyObjectID; */
 /*     NSString    *kKeyUrl; */
 extern NSString    *kKeyTitle;
 
-@interface RDRNotifications : NSObject
-@end
+extern NSString *kNotificationDidParseArticle;
+/*     NSString    *kKeyObjectID; */
+/*     NSString    *kKeyUrl; */
+/*     NSString    *kKeyTitle; */
+extern NSString    *kKeyImageUrl;

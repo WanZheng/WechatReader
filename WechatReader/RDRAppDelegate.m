@@ -13,6 +13,7 @@
 #import "RDRArticleParser.h"
 #import "RDRURLCache.h"
 #import "RDRPrefetchService.h"
+#import "RDRArticleManager.h"
 
 @interface RDRAppDelegate()
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -22,6 +23,8 @@
 @property (nonatomic) RDRPasteBoardMonitor *pasteBoardMonitor;
 @property (nonatomic) RDRURLCache *urlCache;
 @property (nonatomic) RDRPrefetchService *prefetchService;
+@property (nonatomic) RDRArticleManager *articleManager;
+@property (nonatomic) RDRArticleParser *articleParser;
 
 @end
 
@@ -43,10 +46,13 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    // 延迟初始化
+    // 延迟初始化 Services
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setupURLCache];
+
         self.prefetchService = [[RDRPrefetchService alloc] init];
+        self.articleManager = [[RDRArticleManager alloc] initWithManagedObjectContext:self.managedObjectContext];
+        self.articleParser = [[RDRArticleParser alloc] init];
     });
 
     return YES;
@@ -115,13 +121,6 @@
     notification.applicationIconBadgeNumber = 1;
 
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
-
-- (RDRArticleParser *)articleParser {
-    if (_articleParser == nil) {
-        _articleParser = [[RDRArticleParser alloc] init];
-    }
-    return _articleParser;
 }
 
 - (void)setupURLCache {

@@ -85,10 +85,6 @@
                                                           inManagedObjectContext:self.managedObjectContext];
     article.url = url;
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidInsertArticle
-                                                        object:nil
-                                                      userInfo:@{kKeyObjectID: article.objectID, kKeyUrl: url}];
-
     return article;
 }
 
@@ -110,6 +106,7 @@
     BOOL saved = NO;
     if ([self isValidUrl:url]) {
         RDRArticle *article = [self findArticleByUrl:url];
+        BOOL isNewArticle = (article == nil);
 
         if (article == nil) {
             article = [self insertNewArticleWithUrl:url];
@@ -130,7 +127,11 @@
 
         saved = YES;
 
-        [[RDRAppDelegate sharedInstance].articleParser parseArticle:article];
+        if (isNewArticle) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidInsertArticle
+                                                                object:nil
+                                                              userInfo:@{kKeyObjectID: article.objectID, kKeyUrl: url}];
+        }
     }
     
     return saved;

@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class RDRArticleParser;
-
 @interface RDRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (nonatomic) RDRArticleParser *articleParser;
 
 + (RDRAppDelegate *)sharedInstance;
 + (NSURL *)applicationDocumentsDirectory;

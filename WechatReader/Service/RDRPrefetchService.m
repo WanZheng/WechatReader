@@ -97,7 +97,7 @@
         [userInfo setObject:webView.htmlTitle forKey:kKeyTitle];
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidFetchTitle
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidPrefetchArticle
                                                                 object:nil
                                                               userInfo:userInfo];
         });

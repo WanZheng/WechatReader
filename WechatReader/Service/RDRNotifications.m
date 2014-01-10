@@ -12,9 +12,8 @@ NSString *kNotificationDidInsertArticle = @"did-insert-article";
 NSString    *kKeyObjectID = @"objectId";
 NSString    *kKeyUrl = @"url";
 
-NSString *kNotificationDidFetchTitle = @"did-fetch-title";
+NSString *kNotificationDidPrefetchArticle = @"did-fetch-title";
 NSString    *kKeyTitle = @"title";
 
-@implementation RDRNotifications
-
-@end
+NSString *kNotificationDidParseArticle = @"did-parse-article";
+NSString    *kKeyImageUrl = @"image-url";

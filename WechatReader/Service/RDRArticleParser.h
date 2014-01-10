@@ -5,11 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class RDRArticle;
-
 
 @interface RDRArticleParser : NSObject
-
-- (void)parseArticle:(RDRArticle *)article;
 
 @end
