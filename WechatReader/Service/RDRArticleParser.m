@@ -39,7 +39,13 @@
     NSString *url = [userInfo objectForKey:kKeyUrl];
     assert([url isKindOfClass:[NSString class]]);
 
-    NSURL *serverUrl = [[NSURL alloc] initWithString:CONFIG_PARSING_SERVER_URL];
+    NSURL *serverUrl;
+#ifdef CONFIG_PARSING_SERVER_URL
+    serverUrl = [[NSURL alloc] initWithString:CONFIG_PARSING_SERVER_URL];
+#else
+    return;
+#endif
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:serverUrl];
     request.HTTPMethod = @"POST";
 

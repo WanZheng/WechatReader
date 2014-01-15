@@ -44,7 +44,7 @@ static int TAG_IMG = 3;
 
 - (void)viewWillAppear:(BOOL)animated {
 #ifndef CONFIG_APP_NAME
-#   define CONFIG_APP_NAME (@"微信阅读器")
+#   define CONFIG_APP_NAME (@"WebView测试")
 #endif
     self.title = CONFIG_APP_NAME;
 
